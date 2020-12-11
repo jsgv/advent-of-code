@@ -14,12 +14,7 @@ func main() {
 	var items []int
 
 	for scanner.Scan() {
-		line := scanner.Text()
-		i, err := strconv.Atoi(line)
-		if err != nil {
-			fmt.Println(err)
-		}
-
+		i, _ := strconv.Atoi(scanner.Text())
 		items = append(items, i)
 	}
 
@@ -31,7 +26,6 @@ part1:
 				fmt.Printf("Found: %d * %d = %d\n", i, j, i*j)
 				break part1
 			}
-
 		}
 	}
 
