@@ -18,7 +18,6 @@ func main() {
 		items = append(items, i)
 	}
 
-	// part 1
 part1:
 	for _, i := range items {
 		for _, j := range items {
@@ -29,7 +28,6 @@ part1:
 		}
 	}
 
-	// part 2
 part2:
 	for _, i := range items {
 		for _, j := range items {
