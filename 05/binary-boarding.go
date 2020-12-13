@@ -17,9 +17,10 @@ func main() {
 		items = append(items, scanner.Text())
 	}
 
+	// for part 2
 	var numbers []int
 
-	// part 2
+	// part 1
 	max := 0
 	for _, i := range items {
 		n := 0
@@ -43,6 +44,7 @@ func main() {
 		// for part 2
 		numbers = append(numbers, n)
 	}
+	// part 1
 	fmt.Println("Highest seat ID:", max)
 
 	// part 2
