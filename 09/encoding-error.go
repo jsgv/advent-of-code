@@ -58,7 +58,6 @@ outer:
 						fmt.Println("Part 2:", r[0]+r[len(r)-1])
 						break outer
 					}
-
 				}
 			}
 		}
