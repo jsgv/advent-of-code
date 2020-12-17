@@ -16,7 +16,7 @@ type I struct {
 
 var (
 	instructions []*I
-	actionRx     = regexp.MustCompile(`([a-z]{3}) ([-|+]?)(\d+)`)
+	actionRx     = regexp.MustCompile(`([a-z]{3}) ([-|+]?\d+)`)
 )
 
 func work(step int, instructions []*I, acc int) int {
@@ -42,10 +42,8 @@ func work(step int, instructions []*I, acc int) int {
 	case "jmp":
 		return work(step+i.value, instructions, acc)
 	default:
-		fmt.Println("need to implement:", i.operation)
+		return acc
 	}
-
-	return acc
 }
 
 func main() {
@@ -58,7 +56,7 @@ func main() {
 		}
 
 		parts := actionRx.FindStringSubmatch(v)
-		value, _ := strconv.Atoi(parts[2] + parts[3])
+		value, _ := strconv.Atoi(parts[2])
 
 		instructions = append(instructions, &I{
 			operation: parts[1],
@@ -70,21 +68,20 @@ func main() {
 	fmt.Println("Part 1:", work(0, sliceCopy(), 0))
 
 	for idx, v := range instructions {
-		switch v.operation {
-		case "nop":
+		if v.operation == "nop" || v.operation == "jmp" {
 			c := sliceCopy()
-			c[idx].operation = "jmp"
-			if c[idx].value == 0 {
-				c[idx].value = 1
+
+			switch v.operation {
+			case "nop":
+				c[idx].operation = "jmp"
+				break
+			case "jmp":
+				c[idx].operation = "nop"
+				break
 			}
 
 			work(0, c, 0)
-			break
-		case "jmp":
-			c := sliceCopy()
-			c[idx].operation = "nop"
-			work(0, c, 0)
-			break
+
 		}
 	}
 }
