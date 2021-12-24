@@ -1,4 +1,4 @@
-const fs = require('fs');
+import fs from 'fs';
 
 function getItems(): number[] {
     return fs
